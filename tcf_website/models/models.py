@@ -91,7 +91,7 @@ class Department(models.Model):
                 - CATALOG_YEAR_WINDOW,
             }
         return (
-            Course.with_stats()
+            Course.objects.select_related("subdepartment")
             .filter(**qs_filter)
             .order_by("number", "subdepartment__name")
         )
