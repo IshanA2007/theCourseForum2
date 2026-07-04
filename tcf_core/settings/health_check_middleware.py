@@ -10,6 +10,9 @@ class HealthCheckMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
+        # Short-circuit "/health" before the request reaches Django's host
+        # validation so uptime probes (which hit the pod IP rather than a
+        # configured ALLOWED_HOSTS entry) always get a plain 200 "ok".
         if request.path == "/health":
             return HttpResponse("ok")
         return self.get_response(request)
