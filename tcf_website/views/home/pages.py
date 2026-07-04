@@ -17,12 +17,12 @@ def index(request):
     with open(_ABOUT_DATA_DIR / "team_info.json", encoding="UTF-8") as data_file:
         team_info = json.load(data_file)
 
-    mode = request.GET.get("mode", "courses")
-    is_club = mode == "clubs"
+    selected_mode = request.GET.get("mode", "courses")
+    is_club = selected_mode == "clubs"
 
     context = {
         "executive_team": team_info["executive_team"],
-        "mode": mode,
+        "mode": selected_mode,
         "mode_noun": "club" if is_club else "course",
         "search_placeholder": (
             "Search for a club..." if is_club else "Search for a course or professor..."
