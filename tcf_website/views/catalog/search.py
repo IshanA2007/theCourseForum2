@@ -62,7 +62,7 @@ def fetch_courses(query: str):
             )
         )
         .filter(max_similarity__gte=_SIMILARITY_THRESHOLD)
-        .order_by("-max_similarity")
+        .order_by("-similarity_score")
     )
 
 
