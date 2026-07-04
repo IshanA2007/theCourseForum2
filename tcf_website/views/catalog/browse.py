@@ -129,7 +129,14 @@ def _browse_courses(request, mode: str):
 
 
 def browse(request):
-    """View for browse page with advanced course or club search."""
+    """Render the browse landing page for either courses or clubs.
+
+    The requested mode is resolved from the query string via ``parse_mode``.
+    When the mode indicates clubs, the request is delegated to
+    ``_browse_clubs``; otherwise it is handled by ``_browse_courses``. Both
+    helpers additionally serve the advanced-search results (full page or
+    partial fragment) when search parameters are present.
+    """
     mode, is_club = parse_mode(request)
     if is_club:
         return _browse_clubs(request, mode)
