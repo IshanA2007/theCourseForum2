@@ -1210,12 +1210,6 @@ class Review(models.Model):
             value=1,
         ).exists()
 
-        # Delete all prior votes.
-        Vote.objects.filter(
-            user=user,
-            review=self,
-        ).delete()
-
         # Don't upvote again if previously upvoted.
         if upvoted:
             return
@@ -1235,12 +1229,6 @@ class Review(models.Model):
             review=self,
             value=-1,
         ).exists()
-
-        # Delete all prior votes.
-        Vote.objects.filter(
-            user=user,
-            review=self,
-        ).delete()
 
         # Don't downvote again if previously downvoted.
         if downvoted:
